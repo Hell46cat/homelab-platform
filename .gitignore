@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+*.local
+*.key
+*.pem
+secrets/
+data/
+backups/
+inventory/hosts.local.yml
+*.log
