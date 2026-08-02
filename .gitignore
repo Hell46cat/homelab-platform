@@ -9,3 +9,9 @@ data/
 backups/
 inventory/hosts.local.yml
 *.log
+
+# Router firmware and raw backups
+*.bin
+*.img
+network/openwrt/**/firmware/
+network/openwrt/**/backups/

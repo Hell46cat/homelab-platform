@@ -1,3 +1,3 @@
 # Scripts
 
-Small operational helpers for deployment, verification, backup and restore. Scripts must be explicit, fail safely and avoid embedding credentials.
+Небольшие явные helpers для deployment, проверки, backup и restore. Скрипты должны завершаться безопасно при ошибке и не содержать credentials.

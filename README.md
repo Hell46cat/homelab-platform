@@ -1,35 +1,32 @@
 # homelab-platform
 
-Deployment repository for the mini-PC. It owns production Docker Compose definitions, Ansible automation, operational scripts and recovery instructions.
+Отдельный deployment-репозиторий mini-PC: production Docker Compose, Ansible, операционные scripts, сетевые конфиги без секретов и runbooks.
 
-Architecture decisions and learning notes remain in the parent `personal-it` repository under `home-lab/docs/`. Application source code lives in separate repositories under `apps/` on the main PC.
+Причины решений и учебные объяснения находятся в `personal-it/home-lab/docs`. Исходный код приложений — в отдельных репозиториях `personal-it/apps/<service-name>`.
 
-## Repository layout
+## Структура
 
 ```text
 homelab-platform/
-├── compose/       production service definitions
-├── ansible/       repeatable host configuration
-├── scripts/       small explicit operational helpers
-├── docs/          platform runbooks and technical reference
-├── .env.example   documented non-secret variable names
+├── compose/       production stacks и сервисы
+├── ansible/       повторяемая настройка хоста
+├── network/       безопасные конфиги сетевых устройств
+├── scripts/       deploy, verification, backup и restore helpers
+├── docs/          только эксплуатационные runbooks
+├── .env.example
 └── README.md
 ```
 
-## Server paths
+## Пути на сервере
 
 ```text
-/opt/homelab-platform/     this Git checkout
-/srv/home-lab/<service>/    persistent data
-/etc/home-lab/<service>.env secrets and machine-specific settings
+/opt/homelab-platform/      этот Git checkout
+/srv/homelab/<service>/     постоянные данные
+/etc/homelab/<service>.env  секреты и machine-specific настройки
 ```
 
-Secrets, real `.env` files, private keys, database files and backups are never committed.
+Секреты, реальные `.env`, private keys, database files, firmware и сырые backups не коммитятся.
 
-## Initial deployment
+Сервисы добавляются по одному после ручной проверки, описания health check, update, rollback и restore.
 
-The repository is intentionally scaffolded before the mini-PC arrives. Service definitions are added one at a time after a manual local test and a documented rollback path.
-
-See the parent vault page `home-lab/docs/development-and-deployment.md` for the full development and delivery workflow.
-
-
+Полный процесс: `personal-it/home-lab/docs/development-and-deployment.md`.
