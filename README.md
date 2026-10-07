@@ -29,4 +29,4 @@ homelab-platform/
 
 Сервисы добавляются по одному после ручной проверки, описания health check, update, rollback и restore.
 
-Полный процесс: `personal-it/home-lab/docs/development-and-deployment.md`.
+Полный процесс: `personal-it/home-lab/docs/20-development-and-deployment.md`.
