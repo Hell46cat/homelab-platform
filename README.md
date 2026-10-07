@@ -1,32 +1,38 @@
 # homelab-platform
 
-Отдельный deployment-репозиторий mini-PC: production Docker Compose, Ansible, операционные scripts, сетевые конфиги без секретов и runbooks.
+Deployment-репозиторий для хоста/виртуальных машин Proxmox VE (mini-PC GMKtec M5 Plus): production Docker Compose, Ansible плейбуки, операционные скрипты и эксплуатационные runbooks.
 
-Причины решений и учебные объяснения находятся в `personal-it/home-lab/docs`. Исходный код приложений — в отдельных репозиториях `personal-it/apps/<service-name>`.
+- **База знаний и архитектура**: [homelab-wiki](../homelab-wiki/home-lab/docs/00-index.md).
+- **Исходный код приложений**: [homelab-apps](../homelab-apps/README.md).
+
+---
 
 ## Структура
 
 ```text
 homelab-platform/
-├── compose/       production stacks и сервисы
-├── ansible/       повторяемая настройка хоста
-├── network/       безопасные конфиги сетевых устройств
-├── scripts/       deploy, verification, backup и restore helpers
-├── docs/          только эксплуатационные runbooks
-├── .env.example
+├── compose/       # Production Compose stacks и сервисы (Uptime Kuma, Nginx и т.д.)
+├── ansible/       # Повторяемая настройка хоста и VM
+├── scripts/       # Скрипты деплоя, верификации, бэкапа и восстановления
+├── docs/          # Эксплуатационные runbooks (инструкции обслуживания)
+├── .env.example   # Шаблон переменных окружения
 └── README.md
 ```
 
-## Пути на сервере
+---
+
+## Пути на сервере (Debian VM `vm-core`)
 
 ```text
-/opt/homelab-platform/      этот Git checkout
-/srv/homelab/<service>/     постоянные данные
-/etc/homelab/<service>.env  секреты и machine-specific настройки
+/opt/homelab-platform/      # Git checkout этого репозитория
+/srv/homelab/<service>/     # Постоянные данные контейнеров (volumes)
+/etc/homelab/<service>.env  # Секреты и хост-специфичные переменные
 ```
 
-Секреты, реальные `.env`, private keys, database files, firmware и сырые backups не коммитятся.
+---
 
-Сервисы добавляются по одному после ручной проверки, описания health check, update, rollback и restore.
+## Правила безопасности
 
-Полный процесс: `personal-it/home-lab/docs/20-development-and-deployment.md`.
+- Секреты, боевые `.env`, приватные SSH/TLS ключи, дампы БД и бэкапы **никогда не коммитятся в Git**.
+- Сервисы добавляются по одному после локальной проверки и описания health check, update, rollback и restore.
+- Подробный регламент выкладки: [20-development-and-deploy.md](../homelab-wiki/home-lab/docs/20-development-and-deploy.md).
