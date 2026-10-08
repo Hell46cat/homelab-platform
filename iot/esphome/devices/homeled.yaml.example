@@ -1,0 +1,38 @@
+# Шаблон прошивки ESPHome для контроллера homeled (ESP32-C3)
+esphome:
+  name: homeled
+  friendly_name: "Подсветка HomeLED"
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+# Подключение к Wi-Fi (использует secrets.yaml)
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Статический IP (в сети Roy: 192.168.10.50, либо в будущем Roy-IoT: 192.168.40.20)
+  manual_ip:
+    static_ip: 192.168.10.50
+    gateway: 192.168.10.1
+    subnet: 255.255.255.0
+
+# Локальный API для Home Assistant
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# Адресная LED-лента (339 диодов WS2812B)
+# light:
+#   - platform: esp32_rmt_led_strip
+#     rgb_order: GRB
+#     chipset: ws2812b
+#     pin: GPIO2 # Указать реальный пин подключения ленты
+#     num_leds: 339
+#     name: "HomeLED Strip"
