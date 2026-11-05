@@ -15,3 +15,6 @@ inventory/hosts.local.yml
 *.img
 network/openwrt/**/firmware/
 network/openwrt/**/backups/
+
+# Local WLED export backups
+/iot/wled/homeled/*.json.bak
